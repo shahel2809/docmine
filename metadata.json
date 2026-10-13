@@ -1,0 +1,6 @@
+{
+  "name": "DocuMind - AI Study & Exam Preparation Platform",
+  "description": "Upload textbooks and PDFs, search topics, get accurate cited answers with page numbers, explore animated Mermaid flowcharts, take adaptive quizzes, track mistakes, and generate personalized study schedules.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
