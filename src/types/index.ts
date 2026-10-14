@@ -1,4 +1,5 @@
-export type DocumentStatus = 'indexing' | 'ready' | 'error';
+export type DocumentStatus = 'indexing' | 'ready' | 'partial' | 'error';
+export type IngestionStage = 'uploading' | 'parsing' | 'chunking' | 'indexing' | 'ready' | 'failed';
 
 export interface DocumentChunk {
   id: string;
@@ -18,6 +19,8 @@ export interface DocumentMeta {
   fileSize: number;
   uploadDate: string;
   status: DocumentStatus;
+  ingestionStage?: IngestionStage;
+  errorDetail?: string;
   chunksCount: number;
   isSample?: boolean;
   summary?: string;
@@ -32,6 +35,29 @@ export interface Citation {
   matchScore?: number;
 }
 
+export interface VerifiedClaim {
+  id: string;
+  claimText: string;
+  chunkId: string;
+  documentId: string;
+  documentTitle: string;
+  pageNumber: number;
+  snippet: string;
+  status: 'verified' | 'qualified' | 'unsupported';
+  confidence: number;
+  highlightedMatch?: string;
+  qualificationNote?: string;
+}
+
+export interface ConflictItem {
+  docA: string;
+  pageA: number;
+  docB: string;
+  pageB: number;
+  topic?: string;
+  note: string;
+}
+
 export type AnswerFormat = '2-mark' | '5-mark' | '10-mark' | 'short-answer' | 'detailed-explanation';
 
 export interface AnswerResponse {
@@ -41,8 +67,14 @@ export interface AnswerResponse {
   evidenceStatus: 'verified' | 'partial' | 'insufficient';
   evidenceAssessment: string;
   citations: Citation[];
+  claims?: VerifiedClaim[];
+  conflicts?: ConflictItem[];
+  abstentionReason?: string;
+  supportedRatio?: number;
   suggestedQuestions?: string[];
   generatedAt: string;
+  latencyMs?: number;
+  retrievalMode?: 'hybrid_fts5_semantic' | 'fallback';
 }
 
 export type HighlightCategory = 'definition' | 'formula' | 'concept' | 'algorithm' | 'comparison' | 'exam_question';

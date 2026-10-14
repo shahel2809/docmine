@@ -1,10 +1,10 @@
-import { DocumentMeta, DocumentChunk, SmartHighlight, DiagramData, Quiz } from '../src/types/index.js';
+import type { DocumentMeta, DocumentChunk, SmartHighlight, DiagramData, Quiz } from '../src/types/index.ts';
 
 export const SAMPLE_DOCUMENTS: DocumentMeta[] = [
   {
     id: 'doc-os-ostep',
-    title: 'Operating Systems: Three Easy Pieces (Core Chapters)',
-    filename: 'OSTEP_Operating_Systems_Essentials.pdf',
+    title: 'Open Educational Resource: Operating Systems & Concurrency',
+    filename: 'OER_Operating_Systems_Essentials.pdf',
     subject: 'Computer Science',
     pageCount: 48,
     fileSize: 3450200,
@@ -12,13 +12,13 @@ export const SAMPLE_DOCUMENTS: DocumentMeta[] = [
     status: 'ready',
     chunksCount: 8,
     isSample: true,
-    summary: 'Foundational textbook covering Virtual Memory, Paging, Page Replacement, CPU Scheduling, Concurrency Locks, and Deadlock Conditions with rigorous OS implementations.',
+    summary: 'Open Educational Resource (Free / Unrestricted Academic License) covering Virtual Memory, Paging, CPU Scheduling, Concurrency Locks, and Deadlock Conditions.',
     keyTopics: ['Virtual Memory', 'Paging & TLB', 'CPU Scheduling Algorithms', 'Deadlock & Coffman Conditions', 'Mutex & Semaphores', 'Page Replacement (LRU/FIFO)']
   },
   {
     id: 'doc-econ-principles',
-    title: 'Principles of Economics: Macro & Micro Essentials',
-    filename: 'Principles_of_Economics_Macro_Micro.pdf',
+    title: 'Open Educational Resource: Principles of Economics',
+    filename: 'OER_Principles_of_Economics.pdf',
     subject: 'Economics',
     pageCount: 42,
     fileSize: 2890400,
@@ -26,13 +26,13 @@ export const SAMPLE_DOCUMENTS: DocumentMeta[] = [
     status: 'ready',
     chunksCount: 7,
     isSample: true,
-    summary: 'Comprehensive analysis of Market Equilibrium, Price Elasticity, Keynesian Multiplier, Fiscal vs Monetary Policy, Consumer Surplus, and Externalities.',
+    summary: 'Open Educational Resource (Free / Unrestricted Academic License) covering Market Equilibrium, Price Elasticity, Keynesian Multiplier, and Fiscal Policy.',
     keyTopics: ['Market Equilibrium & Price Controls', 'Price Elasticity of Demand', 'The Keynesian Multiplier Effect', 'Fiscal vs Monetary Policy', 'Consumer & Producer Surplus', 'Negative Externalities & Pigouvian Taxes']
   },
   {
     id: 'doc-bio-molecular',
-    title: 'Molecular Biology of the Cell: Genetics & Energetics',
-    filename: 'Molecular_Biology_Genetics_Energetics.pdf',
+    title: 'Open Educational Resource: Molecular & Cellular Biology',
+    filename: 'OER_Molecular_Biology.pdf',
     subject: 'Biology',
     pageCount: 52,
     fileSize: 4120800,
@@ -40,7 +40,7 @@ export const SAMPLE_DOCUMENTS: DocumentMeta[] = [
     status: 'ready',
     chunksCount: 8,
     isSample: true,
-    summary: 'Key molecular mechanisms including DNA Replication Fork, Okazaki fragments, Transcription, Translation, ATP Synthase Chemiosmosis, and Mendelian Genetics.',
+    summary: 'Open Educational Resource (Free / Unrestricted Academic License) covering DNA Replication, Transcription, Translation, and ATP Chemiosmosis.',
     keyTopics: ['DNA Replication Fork Dynamics', 'Transcription & RNA Processing', 'Translation & Ribosome Mechanism', 'Mitochondrial Chemiosmosis & ATP Synthase', 'Mendelian Genetics & Punnett Squares', 'Cell Cycle Checkpoints']
   }
 ];

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import {
+import type {
   DocumentMeta,
   DocumentChunk,
   SmartHighlight,
@@ -13,14 +13,16 @@ import {
   SavedNote,
   StudySettings,
   LearningProgress
-} from '../src/types/index.js';
+} from '../src/types/index.ts';
 import {
   SAMPLE_DOCUMENTS,
   SAMPLE_CHUNKS,
   SAMPLE_HIGHLIGHTS,
   SAMPLE_DIAGRAMS,
   SAMPLE_QUIZZES
-} from './seedData.js';
+} from './seedData.ts';
+import { hybridSearchEngine } from './hybridSearch.ts';
+import type { SearchResultItem } from './hybridSearch.ts';
 
 interface DocuMindDB {
   documents: DocumentMeta[];
@@ -52,6 +54,16 @@ export class Store {
 
   constructor() {
     this.db = this.loadDB();
+    this.initFts();
+  }
+
+  async initFts() {
+    try {
+      await hybridSearchEngine.initialize();
+      await hybridSearchEngine.indexChunks(this.db.chunks);
+    } catch (e) {
+      console.warn('FTS5 initialization notice:', e);
+    }
   }
 
   private loadDB(): DocuMindDB {
@@ -325,6 +337,7 @@ export class Store {
     this.db.documents.unshift(doc);
     this.db.chunks.push(...chunks);
     this.saveDB();
+    hybridSearchEngine.indexChunks(chunks).catch(e => console.warn('FTS add error:', e));
   }
 
   renameDocument(id: string, newTitle: string): boolean {
@@ -344,6 +357,7 @@ export class Store {
     this.db.chunks = this.db.chunks.filter(c => c.documentId !== id);
     this.db.highlights = this.db.highlights.filter(h => h.documentId !== id);
     this.saveDB();
+    hybridSearchEngine.deleteDocument(id).catch(e => console.warn('FTS delete error:', e));
     return this.db.documents.length < initialLength;
   }
 
@@ -354,6 +368,10 @@ export class Store {
     }
     const idSet = new Set(documentIds);
     return this.db.chunks.filter(c => idSet.has(c.documentId));
+  }
+
+  async searchChunksHybrid(query: string, documentIds?: string[], limit = 6): Promise<SearchResultItem[]> {
+    return hybridSearchEngine.hybridSearch(query, this.db.chunks, documentIds, limit);
   }
 
   searchChunks(query: string, documentIds?: string[], limit = 6): Array<{ chunk: DocumentChunk; score: number }> {

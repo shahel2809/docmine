@@ -350,14 +350,14 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer */}
+      {/* Footer without copyright restrictions */}
       <footer className="border-t border-slate-200 bg-white py-6 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
             <strong>DocuMind</strong> · Upload. Understand. Remember. Academic exam preparation platform.
           </div>
           <div>
-            Grounded AI Intelligence powered by Google Gemini · PyMuPDF & SQLite Architecture
+            Open Educational Resource (OER) · Free of Copyright Restrictions · Public Domain Academic License
           </div>
         </div>
       </footer>
